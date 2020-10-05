@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
+  public static DISPLAY_CAT_RECIPE = 'recipe';
+  public static DISPLAY_CAT_SHOPPING = 'shopping';
+
+  @Output() displayCategoryToggled = new EventEmitter<string>();
 
   ngOnInit(): void {
+  }
+
+  displayRecipe(): void {
+    this.displayCategoryToggled.emit(HeaderComponent.DISPLAY_CAT_RECIPE);
+  }
+
+  displayShopping(): void {
+    this.displayCategoryToggled.emit(HeaderComponent.DISPLAY_CAT_SHOPPING);
   }
 
 }
