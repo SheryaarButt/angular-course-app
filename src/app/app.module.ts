@@ -11,6 +11,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import {FormsModule} from '@angular/forms';
 import {DropdownToggleDirective} from './directives/dropdown-toggle.directive';
+import {ShoppingService} from './shopping-list/shopping.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {DropdownToggleDirective} from './directives/dropdown-toggle.directive';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ShoppingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
