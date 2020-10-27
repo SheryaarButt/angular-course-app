@@ -1,5 +1,4 @@
 <app-header (displayCategoryToggled)="setDisplayCategory($event)" ></app-header>
 <div class="container">
-  <app-recipes *ngIf="isDisplayRecipe()"></app-recipes>
-  <app-shopping-list *ngIf="isDisplayShopping()"></app-shopping-list>
+  <router-outlet></router-outlet>
 </div>

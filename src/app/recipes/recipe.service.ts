@@ -9,11 +9,11 @@ export class RecipeService {
   public recipeSelected = new EventEmitter<Recipe>();
   constructor(private shoppingService: ShoppingService){
     this.recipes = [
-      new Recipe('Test Recipe',
+      new Recipe('1', 'Test Recipe',
         'This is a great recipe!',
         'https://upload.wikimedia.org/wikipedia/commons/3/39/Recipe.jpg',
         [new Ingredient('Shrimp', 2), new Ingredient('Pasta', 4)]),
-      new Recipe('Test Recipe 2',
+      new Recipe('2', 'Test Recipe 2',
         'This is an even better recipe!!',
         'https://storage.needpix.com/rsynced_images/healthy-food-3785722_1280.jpg',
         [new Ingredient('Shrimp', 4), new Ingredient('Avocado', 6)])
@@ -24,6 +24,9 @@ export class RecipeService {
   }
   getRecipes(): Recipe[] {
     return this.recipes.slice();
+  }
+  getRecipe(id: string): Recipe {
+    return this.recipes.find((recipe) => recipe.id === id);
   }
   ingredientsToShoppingList(ingredients: Ingredient[]): void{
     for (const ingredient of ingredients) {
