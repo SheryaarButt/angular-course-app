@@ -18,7 +18,11 @@
       <ul class="dropdown-menu">
         <li><a style="cursor: pointer"
                (click) = ingredientsToShoppingList()>To Shopping List</a></li>
-        <li><a style="cursor:pointer">Edit Recipe</a></li>
+        <li><a style="cursor:pointer"
+               (click)="toEditRecipe()">
+              Edit Recipe
+            </a>
+        </li>
         <li><a style="cursor:pointer">Delete Recipe</a></li>
       </ul>
     </div>
