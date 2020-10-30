@@ -13,6 +13,8 @@ import {FormsModule} from '@angular/forms';
 import {DropdownToggleDirective} from './directives/dropdown-toggle.directive';
 import {ShoppingService} from './shopping-list/shopping.service';
 import {AppRoutesModule} from './app-routes/app-routes.module';
+import { PleaseSelectRecipeComponent } from './recipes/please-select-recipe/please-select-recipe.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {AppRoutesModule} from './app-routes/app-routes.module';
     RecipeListComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownToggleDirective
+    DropdownToggleDirective,
+    PleaseSelectRecipeComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
