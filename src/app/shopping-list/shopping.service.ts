@@ -21,4 +21,10 @@ export class ShoppingService {
     this.ingredients.push(ingredient);
     this.updatedIngredients.next(this.getIngredients());
   }
+  deleteIngredient(ingredient: Ingredient): void {
+    if (ingredient) {
+      this.ingredients.splice(this.ingredients.indexOf(ingredient), 1);
+      this.updatedIngredients.next(this.getIngredients());
+    }
+  }
 }
