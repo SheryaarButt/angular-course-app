@@ -13,6 +13,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   public ingredients: Ingredient[] = [];
   public selectedIngredient: Ingredient;
   private ingredientsUpdatedSubscription: Subscription;
+  private selectedIngredientSub: Subscription;
 
   constructor(private shoppingService: ShoppingService) {}
 
@@ -23,16 +24,21 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         (ingredients) => {
           this.ingredients = ingredients;
       });
+    this.selectedIngredientSub =
+      this.shoppingService.selectedIngredient.subscribe((ingredient) => {
+      this.selectedIngredient = ingredient;
+    });
   }
 
   ngOnDestroy(): void {
     this.ingredientsUpdatedSubscription.unsubscribe();
+    this.selectedIngredientSub.unsubscribe();
   }
   isSelected(selectedIngredient: Ingredient): boolean {
     return this.selectedIngredient === selectedIngredient;
   }
   selectIngredient(selectedIngredient: Ingredient): void {
-    this.selectedIngredient = selectedIngredient;
+    this.shoppingService.selectIngredient(selectedIngredient);
   }
 
 }

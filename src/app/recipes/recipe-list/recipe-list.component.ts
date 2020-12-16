@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
 import {RecipeService} from '../recipe.service';
 import {Recipe} from '../recipe.model';
 import {Subscription} from 'rxjs';
@@ -12,6 +12,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   public recipes: Recipe[] = [];
   private recipesUpdatedSubscription: Subscription;
+  @Output() emit = new EventEmitter<void>();
+  private $value: string;
+  set value(value: string) {
+    this.$value = value;
+  }
+  get value(): string {
+    return this.$value;
+  }
 
   constructor(private recipeService: RecipeService) { }
 
@@ -20,6 +28,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipesUpdatedSubscription = this.recipeService.updatedRecipes.subscribe(recipes => {
       this.recipes = recipes;
     });
+    setInterval(() => this.emit.emit(), 5000);
   }
 
   ngOnDestroy(): void {

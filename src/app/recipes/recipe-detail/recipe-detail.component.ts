@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -22,11 +22,16 @@ export class RecipeDetailComponent implements OnInit {
       this.selectedRecipe = this.recipeService.getRecipe(id);
     });
   }
+
   ingredientsToShoppingList(): void {
     this.recipeService.ingredientsToShoppingList(this.selectedRecipe.ingredients);
   }
   toEditRecipe(): void {
     this.router.navigate(['edit'], {relativeTo: this.route});
+  }
+  deleteRecipe(): void {
+    this.recipeService.deleteRecipe(this.selectedRecipe);
+    this.router.navigate(['recipes']);
   }
 
 }

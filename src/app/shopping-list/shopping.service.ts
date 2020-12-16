@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 export class ShoppingService {
   private readonly ingredients: Ingredient[];
   public updatedIngredients = new Subject<Ingredient[]>();
+  public selectedIngredient = new Subject<Ingredient>();
   constructor(){
     this.ingredients = [
       new Ingredient('Ham', 4),
@@ -26,5 +27,13 @@ export class ShoppingService {
       this.ingredients.splice(this.ingredients.indexOf(ingredient), 1);
       this.updatedIngredients.next(this.getIngredients());
     }
+  }
+  selectIngredient(ingredient: Ingredient): void {
+    this.selectedIngredient.next(ingredient);
+  }
+  updateIngredient(selectedIngredient: Ingredient, ingredient: Ingredient): void {
+    const ingredientIndex = this.ingredients.indexOf(selectedIngredient);
+    this.ingredients[ingredientIndex] = ingredient;
+    this.updatedIngredients.next(this.getIngredients());
   }
 }

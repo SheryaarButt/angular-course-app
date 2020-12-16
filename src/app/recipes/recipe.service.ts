@@ -21,6 +21,7 @@ export class RecipeService {
     ];
   }
   addRecipe(recipe: Recipe): void {
+    recipe.id = this.recipes.length === 0 ? '1' : String(+this.recipes[this.recipes.length - 1].id + 1);
     this.recipes.push(recipe);
     this.updatedRecipes.next(this.getRecipes());
   }
@@ -33,6 +34,35 @@ export class RecipeService {
   ingredientsToShoppingList(ingredients: Ingredient[]): void{
     for (const ingredient of ingredients) {
       this.shoppingService.addIngredient(ingredient);
+    }
+  }
+  updateRecipe(updatedRecipe: Recipe): boolean {
+    if (!updatedRecipe.id) {
+      return false;
+    }
+    const currentRecipe = this.recipes.find(recipe => updatedRecipe.id === recipe.id);
+    if (currentRecipe) {
+      currentRecipe.id = updatedRecipe.id;
+      currentRecipe.name = updatedRecipe.name;
+      currentRecipe.description = updatedRecipe.description;
+      currentRecipe.ingredients = updatedRecipe.ingredients;
+      currentRecipe.imagePath = updatedRecipe.imagePath;
+      this.updatedRecipes.next(this.getRecipes());
+      return true;
+    }
+    return false;
+  }
+  saveRecipe(recipe: Recipe): Recipe {
+    if (!this.updateRecipe(recipe)) {
+      this.addRecipe(recipe);
+    }
+    return recipe;
+  }
+  deleteRecipe(recipe: Recipe): void {
+    const recipeIndex: number = this.recipes.indexOf(recipe);
+    if (recipeIndex >= 0) {
+      this.recipes.splice(recipeIndex, 1);
+      this.updatedRecipes.next(this.getRecipes());
     }
   }
 }
