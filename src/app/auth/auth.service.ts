@@ -5,6 +5,7 @@ import {AuthRequestModel} from './auth-request.model';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {User} from './user.model';
+import {environment} from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -13,12 +14,11 @@ export class AuthService {
 
   public userSubject = new BehaviorSubject<User>(null);
 
-  private readonly API_KEY = 'AIzaSyBjYW5Cod9vtAigyiwUjkBT2YjPzQ0aam0';
   private readonly AUTH_URL = 'https://identitytoolkit.googleapis.com/v1';
   private readonly SIGNUP_PATH = '/accounts:signUp';
   private readonly LOGIN_PATH = '/accounts:signInWithPassword';
 
-  private readonly AUTH_PARAMS = new HttpParams().append('key', this.API_KEY);
+  private readonly AUTH_PARAMS = new HttpParams().append('key', environment.fireBaseAPIKey);
 
   constructor(private http: HttpClient) {
   }
